@@ -2,6 +2,7 @@
 //#include <vector>
 //#include <math.h>
 //#include <stdlib.h> //landscape diff
+#include "StringMatchingRules.hpp"
 
 //número de diferentes caracteres entre duas strings
 size_t HammingDistance(const string& x, const string& y){ 
@@ -161,7 +162,7 @@ double P(const size_t length){
 
 //--------------------------------------------------------------
 
-void diffMatching(const string& x, const string& y){
+size_t diffMatching(const string& x, const string& y){
     size_t length = x.size();
     size_t count{0};
     for(size_t i = 0; i < length; ++i)
@@ -169,7 +170,7 @@ void diffMatching(const string& x, const string& y){
     return count;
 }   
 
-void slopeMatching(const string& x, const string& y){
+size_t slopeMatching(const string& x, const string& y){
     size_t length = x.size();
     size_t count{0};
     for(size_t i = 0; i < length; ++i){
@@ -180,6 +181,34 @@ void slopeMatching(const string& x, const string& y){
     return count;
 }
 
-void physicalMatching();
+size_t physicalMatching(const string& x, const string& y){ //o que é o mi?
+    size_t soma{0}, dif{0}, mini{0}, retorno{0};
+    size_t length = x.size();
+    for(size_t i = 0; i < length; ++i){
+        soma += (x[i+1] - y[i]);
+        mini = std::min((x[i] - y[i]), dif);
+    }
+    retorno += soma + (3 * abs(mi) * mini);
+    return retorno;
+}
 
 //-----------------------------------------------------------------
+//versão que compara de 1 a r em posições aleatórias (A) //talvez isso seja chunk
+void rcbMatchingA(const string& x, const string& y, size_t r){
+
+}
+
+//versão que compara de 1 a r em posições iguais (B)
+void rcbMatchingB(const string& x, const string& y, size_t r){
+
+}
+
+//versão que comprara r em posições aleatórias (C) //talvez isso seja chunk
+void rcbMatchingC(const string& x, const string& y, size_t r){
+
+}
+
+//versão que compara r em posições iguais (D)
+void rcbMatchingD(const string& x, const string& y, size_t r){
+
+}
