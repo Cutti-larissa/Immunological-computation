@@ -66,3 +66,7 @@ void dynamic(const std::vector<string> S, const size_t l, const int r);
 //P1 e P2 tbm
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //NSMutation Algorithm
+//Introduces somatic hypermutation mechanism
+//don't discart detectors that match self-data, but try to make them valid
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//Binary template
