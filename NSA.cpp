@@ -70,3 +70,10 @@ void dynamic(const std::vector<string> S, const size_t l, const int r);
 //don't discart detectors that match self-data, but try to make them valid
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //Binary template
+//utiliza tamplates 
+//T thus contains (l - k + 1) . 2^k different elements
+//Ts all the templates contained in at least one self-string (can be represented as a matrix that has 2^k rows), 
+//one for each different w and (l-k+1) columns, one for each starting point i 
+//Tn the set of remaining that are used to construct detectors(receptor) strings
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//DynamiCS
