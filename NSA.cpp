@@ -77,3 +77,18 @@ void dynamic(const std::vector<string> S, const size_t l, const int r);
 //Tn the set of remaining that are used to construct detectors(receptor) strings
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //DynamiCS
+//deal with a nonself detection problem in a continuously changing environment
+//primeiro gera detectores imaturos (random)
+//Usando NS cria mais detectores imaturos até o número predefinido de criações
+//Uma confirmação de segurança humana(coestimulação) é necessária para transformar um detector em um "Memory detector"
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//Schemata-based
+//convert data space into schemata space (crompress the data)
+//a schema r é definido como a conjunção dos intervalos como in the rules
+//Um número de schemata comuns é evoluido primeiramente através de um algoritmo generico de coevolução in self-data space
+//Esse número é "a number of non-inter-breeding subpopulations"
+//Espécies são geradas aleatóriamente e outras são adicionadas até um número determinado
+//Todas as espécies são decodificadas em comom schemata
+//Detectors são gerados no espaço complementar da schemata usando a estratégia "gneration-and-test" 
+//Se o detector contém algum comom schemata, ele é descartado
+//--------------------------------------------------------------------------------------------------------------------------------------------------
