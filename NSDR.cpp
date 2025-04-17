@@ -29,6 +29,8 @@ int dist(struct elem* elem1, struct elem* elem2){
     return dis;
 }
 
+//fitness(struct elem* elem)
+
 void nsdr(std::vector<std:vector<int>> S,int numLevels, std::vector<std:vector<int>> v){
     struct elem* c, p1, p2;
     int numGeracoes, popSize; // o que são essas infos?
