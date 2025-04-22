@@ -56,7 +56,7 @@ void NSFDR(struct amostra* Self){
     //inicializar população como individuos aleatórios
     for (int j = 1; j < num_gen; ++j){
         for (int k = 1; k < (pop_size/2); ++k){
-            p1 = select(Self);
+            p1 = select(Self); //Selecionar dos gerados aleatóriamente provavelmente
             p2 = select(Self);
             c = crossover(p1, p2);
             //mutaciona c (?)

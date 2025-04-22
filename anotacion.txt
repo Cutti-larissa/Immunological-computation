@@ -1,0 +1,86 @@
+#Teoria de seleção por clonagem
+Proliferação de células imunes na presença de antigenos
+A proliferação e diferenciação de linfócitos maduros seria estimulado através da presença de nonself cells
+
+#Teoria de rede imunológica
+Como a meméria imunológica seria formada
+Idiotypic network - uma rede regulada de anticorpos e anti-anticorpos
+epitope de um anticorpo é chamada de idiotype
+1 - Um antigeno é reconhecido por uma B-cell que secreta anticorpos ab1
+2 - ab1 são reconhecidos por "anti-idiotypic" das B-cells que secretam anticorpos ab2
+3 - Essas interações poderiam levar a geração de ab3 que reconheceriam ab2 e assim por diante
+
+#First Gen IN (RI)
+Tentativa de prever o número de diferentes tipos de anticorpoos(clones) presentes no sangue
+Se concentra na interação de moléculas livres de anticorpos (não dá atenção a B e T-cells) 
+
+#Second Gen IN(RI)
+Rede que tenta modelar o comportamento automático natural do sistema imunológico (sem a presença de antigenos)
+céluas B e T ativads (sem a presença de antigenos) influenciam outras e as em repouso não
+Interações de B-cells dependem da afinidade com preexisting anticorpos soluveis e self-antigenos e tem diferentes funções de consequência 
+
+#Third Gen IN(RI)
+Sistema imunológico central(grupo de ativos e autireativos e interconectados linfócitos[10-15%]) e periférico(estão em repouso a não ser que sejam especificamente ativados[85-90%])
+Incoorpora a cooperação de B e T-cells
+Assumido que qualquer linfócito pertence ou ao central ou ao periférico
+B-cells ativação ocorre em duas etapas (indução e cooperação entre B-cells induzidas e T-cells ativadas)
+
+#Multiepitope IN(RI)
+Tenta mapear o RI em um processo distribuido paralelamente(PDP)
+linfócitos B podem agir como unidades que compoem o PDP (recebem inputs, geram outputs, lembram de especificidade antigenica e convetem inputs em outputs)
+O peso de conexão entre dois linfócitos pode ser considerado a afinidade entre eles
+O comportamento de aprendizado usa um não supervisionado local (Hebbian) learning rule
+
+#Modeling the Germinal Center
+lugares onde a B-cell estimuilada por antigeno completa o seu processo de maturação de afinidade
+Provê um microambiente especializado para a proliferação de B-cells por expanção clonal e hypermutação somática
+expansão clonal(dark) e seleção clonal(ligth)
+(contas modelos OP e Kesmir-Boer)
+modelo de simulação DKP GC -> proliferação, seleção e memória
+
+#Teoria Danger
+Propostas de discutem a validade do self/nonself 
+self-assertion -> danger = interação entre estimulos externos e o estado atual do sistema imunológico
+o mesmo estimulo pode produzir respostas diferentes em tempos diferentes
+A resposta imunológica é determinada pela presença ou falta de sinais de alarme 
+
+#Aspectos computacionais
+Pattern matching
+Extração de caracteristicas
+Aprender e memória
+Diversidade
+Processo distribuido 
+Self regulation
+Self protection
+
+//------------------------------------------------
+detectors = T-cells
+clusters = B-cells
+classifier = anticorpors
+strings (?)
+Amostras positivas = self-cells
+dados de treinamento = self-molecules
+patterns = células imunológicas
+dados de entrada = antigenos
+amostras de verificação de dados = patógenos
+dados de teste = epitopes
+distância e similatidade de medidas = medidas de afinidade no shape-space
+string-matching rule = regras complementares e outras regras
+
+antigenos e anticorpos são representados como coordenadas em um espaço (tipicamente um espaço euclidiano) e a afinidade como a distância entre esses pontos
+quanto menor a distância maior a afinidade
+ás vezes a coordenada não é dada mas a distância sim
+raio como métrica para dizer se a afinidade é suficiente para um match 
+
+Representação de B- e T-cells, anticorpos e antigenos:
+1 - Strings binárias
+2 - Strings de alfabetos finitos (outros além do binário)
+3 - Vetores de valores reais
+4 - representação hibrida 
+
+Métricas de Afinidade:
+binário()
+strings(hamming)
+vetores(euclidian)
+
+detectors - T-cell model - descreve uma região do shape-space
