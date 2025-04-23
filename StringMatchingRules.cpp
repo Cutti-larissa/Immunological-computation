@@ -17,7 +17,7 @@ size_t HammingDistance(const string& x, const string& y){ //Tratar casos em que 
 //----------------------------------------------------------------------------------------------------------------------------------------------
 //Binary  distance
 
- //número de 1's que match nas duas strings
+//número de 1's que match nas duas strings
 size_t BDa(const string& x, const string& y){
     size_t result{0};
     size_t length = x.size();
