@@ -84,3 +84,7 @@ strings(hamming)
 vetores(euclidian)
 
 detectors - T-cell model - descreve uma região do shape-space
+No espaço euclidiano, o detector tem o formato de uma hiperesfera (determinado pelo centro e pelo raio)
+ou por um hiperretangulo caracterisado pelos seus cantos opostos
+quando o detector é uma string binária (centro do detector) e seu valor limite
+o detector representará todas as sequências que estão a uma distância do centro abaixo desse limite.
