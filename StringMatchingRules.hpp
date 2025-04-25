@@ -1,6 +1,8 @@
 #ifndef STRING__MATCH_RULE
 #define STRING__MATCH_RULE
 
+//Ao final passar os comentários para esse arquivo
+
 //fractal like shape
 size_t HammingDistance(const string& x, const string& y);
 //---------------------------------------------------------------------------------------
@@ -36,12 +38,13 @@ short rcmr(const string& x, const string& y, const size_t length, const size_t r
 size_t euclidianDistance(const std::vector<size_t> x, const std::vector<size_t> y, const size_t length);
 size_t paticialED(const std::vector<size_t> x, const std::vector<size_t> y, const size_t length, const size_t w); //variation of the euclidian distance (specific window)
 size_t minkowskiDistance(const std::vector<size_t> x, const std::vector<size_t> y, const size_t length, const size_t l); //lambda 1 = manhattan d / lambda 2 = euclidian d
-void chebyshevDistance(); //infinity norm / maximum of the differences for all features
+size_t chebyshevDistance(const std::vector<size_t> x, const std::vector<size_t> y, const size_t length); //infinity norm / maximum of the differences for all features
 //---------------------------------------------------------------------------------------
 //mixed
-void HEOM(); //heterogeneous Euclidian-Overlap Metric
-void heom();
-void HVDM(); //heterogeneous Value Difference Metric
-void hvdm();
+unsigned short overlap(const size_t xi, const size_t yi); //variáveis categóricas
+size_t heom(const size_t xi, const size_t yi, const size_t rangei); //variáveis reais
+size_t HEOM(const std::vector<size_t> x, const std::vector<size_t> y, const size_t N);
+size_t hvdm(const size_t xi, const size_t yi, const size_t rangei); //também possui diferenciação em váriaveis categóricas e reais, utiliza função vdm
+size_t HVDM(const std::vector<size_t> x, const std::vector<size_t> y, const size_t N);
 
 #endif

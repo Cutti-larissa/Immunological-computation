@@ -267,3 +267,58 @@ size_t chebyshevDistance(const std::vector<size_t> x, const std::vector<size_t> 
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 //Mixed representation
+
+//Heterogeneous Euclidian-Overlap Metric
+
+//Hamming distance definido como x=y -> 0, else 1
+unsigned short overlap(const size_t xi, const size_t yi){
+    if (xi == yi)
+        return 0;
+    return 1;
+}
+
+size_t heom(const size_t xi, const size_t yi, const size_t rangei){ //range = fator de escala para a iésima váriavel contínua
+    unsigned short categorico; //o que é uma variavel ser categórica ou real? 
+    size_t retorno{0}, sub{0};
+    if(categorico)
+        retorno = overlap(xi,yi);
+    else{
+        sub = abs(xi - yi);
+        retorno = sub / rangei;
+    }
+    return retorno;
+}
+
+size_t HEOM(const std::vector<size_t> x, const std::vector<size_t> y, const size_t N){
+    size_t dist{0}, heom{0}, rangei{1}; //verificar o que é o rangei
+    for(int i = 0; i < N; ++i){
+        heom = heom(x[i], y[i], rangei);
+        dist += pow(heom, 2);
+    }
+    dist = sqrt(dist);
+    return dist; 
+}
+
+//Heterogeneous Value Difference Metric
+
+size_t hvdm(const size_t xi, const size_t yi, const size_t rangei){
+    unsigned short categorico; //o que é uma variavel ser categórica ou real? 
+    size_t retorno{0}, sub{0};
+    if(categorico)
+        retorno = sqrt(vdm(xi, yi, 1)); //vdm recebe parametro char, talvez seja necessário fazer algumas modificações
+    else{
+        sub = abs(xi - yi);
+        retorno = sub / rangei;
+    }
+    return retorno;
+}
+
+size_t HVDM(const std::vector<size_t> x, const std::vector<size_t> y, const size_t N){
+    size_t dist{0}, hvdm{0}, rangei{1}; //o que é rangei?
+    for(int i = 0; i < N; ++i){
+        hvdm = hvdm(x[i], y[i]);
+        dist += pow(hvdm, 2);
+    }
+    dist = sqrt(dist);
+    return dist; 
+}
