@@ -30,7 +30,7 @@ void diffMatching(const string& x, const string& y, const size_t N);
 void slopeMatching(const string& x, const string& y, const size_t N);
 void physicalMatching(const string& x, const string& y, const size_t N, const int mi);
 //---------------------------------------------------------------------------------------
-short rcb(const string& x, const string& y, const size_t length, const size_t r);
+unsigned short rcb(const string& x, const string& y, const size_t length, const size_t r);
 //---------------------------------------------------------------------------------------
 short rcmr(const string& x, const string& y, const size_t length, const size_t r);
 //---------------------------------------------------------------------------------------

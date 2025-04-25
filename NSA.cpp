@@ -1,30 +1,56 @@
 #include <iostream>
 #include <vector>
-#include "NSA.hpp"
+#include "StringMatchingRule.hpp"
 
-std::vector<string> generic(const std::vector<string> S, const size_t l, const int r){
-    //gera um vetor de strings que todos falhem em match os elementos de S
-    //Monitora novas samples de U (D pertence a U e S tbm pertence a U), se qualquer detector match as novas samples, classifica como nonself 
+//S = conjunto de dados self
+//l = tamanho dos dados
+//r = parâmetro(limite) de matching, acredito que seja o número de detectores escolhidos
+//retorno = um conjunto de detectores
+std::vector<string> generic(const std::vector<string> S, const size_t l, const int r){ 
+    //gera um conjunto de detectores que todos falhem em match os elementos de S
+    //Monitora novas amostras de U, se qualquer detector match as novas amostras, classifica como nonself a amostra 
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------
-//exhaustive
-string ramdomString();
+//String representation
+//Cada detector é representado como uma string de tamanho fixo de um alfabeto finito (ex.: binário [0, 1])
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+//exhaustive -> Não muito eficiente, necesidade de poder computacional cresce com o tamanho de self para gerar os detectores aleatóriamente
+//              Para muitas escolhas de l e r e a composição de S, as gerações de detectores pode ser proibitiva
 
-unsigned char match(const std::vector<string> S, const string d, const int r);
+string ramdomDetector(const std::vector<string> S, const size_t l){
+    //gerar uma string(binária?) de tamanho l
+}
 
-std::vector<string> exhaustive(const std::vector<string> S, const size_t l, const int r, const int T){
-    std::vector<string> D;
+unsigned char match(const std::vector<string> S, const string d, const int r){
+    unsigned short matching{0};
+    size_t size{S.size()};
+    for (int i = 0; i < size; ++i){
+        matching = rcb(S[i], d, size, r);
+        if (matching == 1)
+            return 1;
+    }
+    return 0;
+}
+
+//S = conjunto de self
+//l = tamanho das strings(dados)
+//r = parâmetro(limite) de matching (para a rcb matching rule), 1 <= r <= l
+//T = tamanho de repertório (número de detectores)
+//retorno = conjutno de detectores
+//matching rule = rcb
+std::vector<string> exhaustive(const std::vector<string> S, const size_t l, const unsigned int r, const int T){
+    std::vector<string> D; //inicializa o conjunto vazio
     while (D.size() < T) {
         string d;
-        d = ramdomString();//gera uma string alearória (binária?) pertencente a U
+        d = ramdomDetector(S, l);//gera uma string de tamanho l alearória (binária?) de um alfabeto definido(binário?)
         if (!match(const std::vector<string> S, d r))
             D.push_back(d);
     }
+    return D;
 }
-
 //--------------------------------------------------------------------------------------------------------------------------------------------------
-//dynamic //ruim para strings longas e com valores grandes de r
+//dynamic -> ruim para strings longas e com valores grandes de r
 unsigned int macthes(const string t, const std::vector<string> S){
     for (int i = 0; i < S.size(); ++i)
         if(t == S[i])

@@ -53,7 +53,8 @@ Processo distribuido
 Self regulation
 Self protection
 
-//------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 detectors = T-cells
 clusters = B-cells
 classifier = anticorpors
@@ -88,3 +89,36 @@ No espaço euclidiano, o detector tem o formato de uma hiperesfera (determinado 
 ou por um hiperretangulo caracterisado pelos seus cantos opostos
 quando o detector é uma string binária (centro do detector) e seu valor limite
 o detector representará todas as sequências que estão a uma distância do centro abaixo desse limite.
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#String Matching Rules
+#Considerações
+
+O shape-space
+rcb -> gridlike (forma de grade);
+r-chunk -> similar a rcb, mas mais simples;
+Hamming e Rogers e Tanimoto -> "fractal"-like (padrão geomético que exibe autosimilaridade);
+//rcb e r-chunk não afetadas na mudança de binário para gray (representação)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Maturação de afinidade
+Processo de variação(hipermutação somática) e seleção(performada para melhor corresponder ao patógeno em questão) que ocorre entre B-cells estimuladas
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Aplicando modelos baseados no sistema de imunidade
+1 - Identificar as caracteristicas do problema e decidir como isso pode ser modelado
+2 - Selecionar um esquema de representação para cada entidade 
+3 - Uma medida de afinidade deve ser usada de acordo com a regra de matching definida e o algoritimo de imunidade escolhida
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Discriminação Self/Nonself 
+PS e NS 
+PS - Fase de treino, se a T-cell falha em reconhecer alguma das MHC moléculas, elas é descartada, se não é mantida
+NS - Fase de teste, se reconheceu MHC, mas reconheceu uma self, T-cell falha e é descartada
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Algoritimos de seleção negativa
+Objetivo -> cobrir o nonself space com um set de detectores apropriados
+Distinguir entre self e nonself space, enquanto apenas amostras se self estão disponíveis
+Dividido em duas partes: gerar o detector(feito a partir de um processo de aleatorização que usa os selfs sets como input) 
+                        e fazer a nonself detection (detectores gerados são usados para classificar se novas amostras são self ou nonself, se o detector identifica = nonself)

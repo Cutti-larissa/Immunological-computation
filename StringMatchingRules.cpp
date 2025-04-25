@@ -192,7 +192,7 @@ size_t physicalMatching(const string& x, const string& y, const size_t N, const 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 //R-contigous bits matching
 //os bits são iguais nas mesmas posições
-short rcb(const string& x, const string& y, const size_t length, const size_t r){
+unsigned short rcb(const string& x, const string& y, const size_t length, const size_t r){
     size_t t{0};
     size_t maiorM{0};
     for(int i = 0; i < length; ++i){
