@@ -61,6 +61,7 @@ std::vector<std::string> exhaustive(const std::vector<std::string> S, const size
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 //dynamic -> ruim para strings longas e com valores grandes de r
+//utiliza rcb tbm
 unsigned int macthes(const string t, const std::vector<string> S){
     for (int i = 0; i < S.size(); ++i)
         if(t == S[i])
@@ -70,9 +71,10 @@ unsigned int macthes(const string t, const std::vector<string> S){
 }
 
 //representar o vetor de strings como um vetor de vetores de 0 e 1 ou blank?
+//programação dinamica, pesquisar!!
 std::vector<std::vector<size_t>> P1(const std::vector<string> S, const std::vector<string>t, std::vector<std::vector<size_t>> C,  const size_t l, const int r){ //backtracking
     for (size_t i = 1; i <= (l-r+1); ++i){
-        while (1){ //enquanto o size de Ci[s] for menor que o size de t faça
+        while (C[i][s] <= t){ //enquanto o size de Ci[s] for menor que o size de t faça
             if (matches(t, S))
                 //Ci[s] = 0
             else 
@@ -96,10 +98,21 @@ void P2(std::vector<std::vector<size_t>> C){ //busca binaria? talvez aplicar uma
 }
 
 //chama P1 e P2
-void dynamic(const std::vector<string> S, const size_t l, const int r);
+void dynamic(const std::vector<std::string> S, const size_t l, const int r);
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //Greedy
 //P1 e P2 tbm
+//rever o que é template
+
+//Dois arrays Ds e Dr são criados
+//Ds é usado para "seguir" os templates, os detectors com entrada diferente de 0 são "templates de dectores válidos"
+//Dr indica para cada template, o número de strings ainda unmached por detectores (anteriores?)
+void P1(const std::vector<string> S, const std::vector<string>t, std::vector<std::vector<size_t>> C,  const size_t l, const int r); 
+//Para gerar novos detectores, aqueles templates matching a maioria das unmacheds nonselfs strings são selecionados
+//O array Dr é atualizado toda vez que um novo detector é gerado, ficando com Cr e C'r (ao invés de Dr) e incrementando eles 
+void P2(std::vector<std::vector<size_t>> C)
+void greedy(const std::vector<std::string> S, const size_t l, const int r); //chama P1 e P2
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //NSMutation Algorithm
 //Introduces somatic hypermutation mechanism
