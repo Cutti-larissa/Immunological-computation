@@ -122,35 +122,42 @@ void greedy(const std::vector<std::string> S, const size_t l, const int r); //ch
 //Não discarta os detectores que match self-data como no exhaustive, mas tenta os deixar válidos
 //chama ramdomDetector e match iguais ao exhaustive
 //demora mais que o exhaustive se quando match mudar toda a string
-//A descrição do algoritmo diz que mutaciona apenas a parte que deu match
+//Para match na região r:
+//retorno de rcb deve ser i se deu match e 0 se não deu
+//match na região r mesmo desempenho que exhaustive quando o exhaustive encontra
+//talvez meu algoritmo esteja errado ou com um desempenho pior do que o esperado
 
-unsigned char match(const std::vector<std::string> S, const std::string d, const size_t l, const int r){
+char randomL(){
+    static const char alfabeto[] =  "01";
+    char letra = alfabeto[rand() % 2];
+    return letra;
+}
+ 
+unsigned char match(const std::vector<std::string> S, std::string d, const size_t l, const int r){
     unsigned short matching{0};
     size_t size{S.size()};
     for (int i = 0; i < size; ++i){
         matching = rcb(S[i], d, l, r);
-        if (matching == 1)
-            return 1;
+        if (matching != 0){
+        for (int j = matching - r; j <= matching; ++j)
+            d[j] = randomL();
+            --i;
+        }
     }
     return 0;
 }
 
 std::vector<std::string> mutation(const std::vector<std::string> S, const size_t l, const unsigned int r, const int T){
-    std::vector<std::string> D; //inicializa o conjunto vazio
-    unsigned int it{0};
+    std::vector<std::string> D;
     while (D.size() < T) {
         std::string d;
-        d = ramdonDetector(l);//gera uma string de tamanho l alearória (binária?) de um alfabeto definido(binário?)
-        while(match(S, d, l, r) && it < 1024){ //trocar constante pelo fatorial do tamanho da string 
-            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count(); //gera uma seed aleatória de acordo com o tempo atual
-            shuffle (d.begin(), d.end(), std::default_random_engine(seed)); //embaralha string
-            ++it;
-        }
+        d = randomDetector(l);
         if(!(match(S, d, l, r)))
             D.push_back(d);
     }
     return D;
 }
+   
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //Binary template
 //utiliza tamplates 
