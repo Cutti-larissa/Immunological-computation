@@ -192,18 +192,18 @@ size_t physicalMatching(const string& x, const string& y, const size_t N, const 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 //R-contigous bits matching
 //os bits são iguais nas mesmas posições
-unsigned short rcb(const string& x, const string& y, const size_t length, const size_t r){
-    size_t t{0};
+unsigned short rcb(const std::string& x, const std::string& y, const size_t length, const size_t r){
+    size_t m{0};
     size_t maiorM{0};
     for(int i = 0; i < length; ++i){
         if (x[i] == y[i]){
-            t ++;
-            if (t > maiorM)
-                maiorM = t; //talvez usar essa parametro para comparação de maior match entre duas strings
-            if (t == r)
-                return 1; //verdadeiro, as strings match em um size r
+            m++;
+            if (m > maiorM)
+                maiorM = m; //talvez usar essa parametro para comparação de maior match entre duas strings
         }else 
             t = 0;
+        if (m == r)
+            return 1; //verdadeiro, as strings match em um size r
     }
     return 0;
 }

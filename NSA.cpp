@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>    // std::shuffle (mutation)
+#include <random>       // std::default_random_engine (mutation)
+#include <chrono>       // std::chrono::system_clock (mutation)
 #include "StringMatchingRule.hpp"
 
 //S = conjunto de dados self
@@ -20,7 +23,7 @@ std::vector<std::string> generic(const std::vector<string> S, const size_t l, co
 //Está funcionando, mas é preciso colocar um critério de parada para caso não existam detectores
 //Arquivo de teste (t.cpp) na pasta extra
 
-std::string ramdomDetector(const size_t l){
+std::string randomDetector(const size_t l){
     static const char alfabeto[] =  "01"; //no caso de for binario, se não, tem que estudar a possibilidade de usar o S ou o alfabeto do espaço considerado
     std::string tmp_s;
     tmp_s.reserve(l);
@@ -32,7 +35,7 @@ std::string ramdomDetector(const size_t l){
     return tmp_s;
 }
 
-unsigned char match(const std::vector<std::string> S, const string d, const size_t l, const int r){
+unsigned char match(const std::vector<std::string> S, const std::string d, const size_t l, const int r){
     unsigned short matching{0};
     size_t size{S.size()};
     for (int i = 0; i < size; ++i){
@@ -53,14 +56,14 @@ std::vector<std::string> exhaustive(const std::vector<std::string> S, const size
     std::vector<std::string> D; //inicializa o conjunto vazio
     while (D.size() < T) {
         std::string d;
-        d = ramdomDetector(l);//gera uma string de tamanho l alearória (binária?) de um alfabeto definido(binário?)
+        d = randomDetector(l);//gera uma string de tamanho l alearória (binária?) de um alfabeto definido(binário?)
         if (!match(S, d, l, r))
             D.push_back(d);
     }
     return D;
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
-//dynamic -> ruim para strings longas e com valores grandes de r
+//dynamic -> ruim para strings longas e com valores grandes de r (programação dinâmica)
 //utiliza rcb tbm
 unsigned int macthes(const string t, const std::vector<string> S){
     for (int i = 0; i < S.size(); ++i)
@@ -100,7 +103,7 @@ void P2(std::vector<std::vector<size_t>> C){ //busca binaria? talvez aplicar uma
 //chama P1 e P2
 void dynamic(const std::vector<std::string> S, const size_t l, const int r);
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-//Greedy
+//Greedy (programação dinâmica)
 //P1 e P2 tbm
 //rever o que é template
 
@@ -115,8 +118,39 @@ void greedy(const std::vector<std::string> S, const size_t l, const int r); //ch
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //NSMutation Algorithm
-//Introduces somatic hypermutation mechanism
-//don't discart detectors that match self-data, but try to make them valid
+//Introduz somatic hypermutation mechanism
+//Não discarta os detectores que match self-data como no exhaustive, mas tenta os deixar válidos
+//chama ramdomDetector e match iguais ao exhaustive
+//demora mais que o exhaustive se quando match mudar toda a string
+//A descrição do algoritmo diz que mutaciona apenas a parte que deu match
+
+unsigned char match(const std::vector<std::string> S, const std::string d, const size_t l, const int r){
+    unsigned short matching{0};
+    size_t size{S.size()};
+    for (int i = 0; i < size; ++i){
+        matching = rcb(S[i], d, l, r);
+        if (matching == 1)
+            return 1;
+    }
+    return 0;
+}
+
+std::vector<std::string> mutation(const std::vector<std::string> S, const size_t l, const unsigned int r, const int T){
+    std::vector<std::string> D; //inicializa o conjunto vazio
+    unsigned int it{0};
+    while (D.size() < T) {
+        std::string d;
+        d = ramdonDetector(l);//gera uma string de tamanho l alearória (binária?) de um alfabeto definido(binário?)
+        while(match(S, d, l, r) && it < 1024){ //trocar constante pelo fatorial do tamanho da string 
+            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count(); //gera uma seed aleatória de acordo com o tempo atual
+            shuffle (d.begin(), d.end(), std::default_random_engine(seed)); //embaralha string
+            ++it;
+        }
+        if(!(match(S, d, l, r)))
+            D.push_back(d);
+    }
+    return D;
+}
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //Binary template
 //utiliza tamplates 
