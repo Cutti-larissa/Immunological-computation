@@ -122,3 +122,59 @@ Objetivo -> cobrir o nonself space com um set de detectores apropriados
 Distinguir entre self e nonself space, enquanto apenas amostras se self estão disponíveis
 Dividido em duas partes: gerar o detector(feito a partir de um processo de aleatorização que usa os selfs sets como input) 
                         e fazer a nonself detection (detectores gerados são usados para classificar se novas amostras são self ou nonself, se o detector identifica = nonself)
+
+#Metodologia exhaustiva -> Vai gerando aleatório até possuir a quantidade desejada de detectores com as propriedades específicas
+#Metodologia dinâmica -> Utiliza programação paralela/dinâmica (estudar)
+#Metodologia Greedy -> Utiliza programação paralela/dinãmica também, porém verifica da esquerda para a direita e da direita para esquerda o match
+
+#Metodologia de template binário
+Template -> string de tamanho l de um alfabeto {0, 1, *}
+Onde, * é "don't care"
+Cada template t(i,w) tem a substring de tamanho k que começa na posição i que é igual a uma string binária w de comprimento k e todos os bits restantes são don't cares.
+O set de todos os templetes possiveis contém (l-k+1) * 2^k diferentes elementos.
+T pode ser separado em dois subsets disjuntos:
+	Ts - todos os templates que contém contidos em pelo menos uma self-string  
+		Ts - pequena fração de T . T, pode ser representado como uma matrix que tem 2^k linhas, uma para cada w diferente, e (l - k + 1) colunas, uma para cada ponto i de inicio. 
+	Tn - o set com os templates restantes que são usados para construir os detectors (receptor) strings 
+Árvore binária utilizada para representar a conexão entre as self-templates
+Seguindo a representação da árvore, todas as possíveis "self-strings" podem ser reconstruidas e as non-self podem ser encontradas
+As nonself podem vir de duas fontes: 
+	Podem ser construida a partir dos templates em Ts e os templates em Tn (que contém nonself templates)
+
+#Metodologia de DynamiCS
+Utilizado para lidar com um espaço que está constantemente mudando
+Immature population
+	"immature detectors" são gerados com "genótipos" aleatórios
+	Usando um algoritmo de seleção negativa (NS), novos detectores imaturos são gerados e adicionados ao set depois de um número predefinido de gerações
+	Se um detector está dentro de um predefinido "life span" L e os matchs são maiores que um predefinido "activation threshold" A, ele se torna um MEMORY DETECTOR 
+mature population
+	"mature detectors" são usados em todos os "antigens", mas são dependentes de uma interação humana, (confirmação/coestimulação) humana.
+- Utiliza hash(?)
+"memory detector"
+
+#Metodologia Schemata-Based Detection Rules
+Converter a data space em um schemata space, isso comprime o data space
+Para um número real de caracteristicas, a schema r é definido como a conjunção dos intervalos como nas regras
+Common schemata - aqueles que são comuns em um grupo de regras
+Um número de commom schematas são primeiramente evoluidos a partir de um algoritmo de geração coevolucionário no self data space
+|-> a população utilizada nesse algoritmo consiste em um número de subpopulações que não se cruzam
+"Species" são inicializadas aleatóriamente e novas espécies são adicionadas na população até que o número total de "Species" atinge certo valor.
+Então todas as "species" são decodificadas em um common schemata
+Detectores são construidos em um espaço complementar usando o algoritmo de "gerar e testar"
+O detector é rejeitado se contém qualquer commom schemata.
+
+#Tabela 4.1 com a complexidade de cada algoritmo pg 74
+
+#Immunological hole -> um set de nonself string que nenhum anticorpo existente falha em match um self
+(revisar conceito) #tabela no livro
+Geração de holes
+Holes são inevitáveis
+Mas uma matching rule como um threshold variável pode cobrir melhor os buracos
+
+#Análise geral
+quanto menor o valor de r, mais gerais são os detectores
+Representações em strings tem a facilidade de serem representadas binariamente, são mais fáceis de analisar e são boas para informação textual ou categórica
+Mas possuem limitações em interpretar o problem spcae original, possuem um potencial problema de escabilidade, dificil de combinar com outras tecnicas (como machine learning)
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ALgoritmos de seleção negativa com representação em valores reais

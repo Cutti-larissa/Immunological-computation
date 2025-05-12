@@ -9,10 +9,10 @@
 //l = tamanho dos dados
 //r = parâmetro(limite) de matching, acredito que seja o número de detectores escolhidos
 //retorno = um conjunto de detectores
-std::vector<std::string> generic(const std::vector<string> S, const size_t l, const int r){ 
-    //gera um conjunto de detectores que todos falhem em match os elementos de S
-    //Monitora novas amostras de U, se qualquer detector match as novas amostras, classifica como nonself a amostra 
-}
+std::vector<std::string> generic(const std::vector<string> S, const size_t l, const int r)
+//ideia geral, não um algoritmo específico
+//gera um conjunto de detectores que todos falhem em match os elementos de S
+//Monitora novas amostras de U, se qualquer detector match as novas amostras, classifica como nonself a amostra 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 //String representation
@@ -160,14 +160,9 @@ std::vector<std::string> mutation(const std::vector<std::string> S, const size_t
    
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //Binary template
-//utiliza tamplates 
-//T thus contains (l - k + 1) . 2^k different elements
-//Ts all the templates contained in at least one self-string (can be represented as a matrix that has 2^k rows), 
-//one for each different w and (l-k+1) columns, one for each starting point i 
-//Tn the set of remaining that are used to construct detectors(receptor) strings
+//utilização de árvore binária
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //DynamiCS
-//deal with a nonself detection problem in a continuously changing environment
 //primeiro gera detectores imaturos (random)
 //Usando NS cria mais detectores imaturos até o número predefinido de criações
 //Uma confirmação de segurança humana(coestimulação) é necessária para transformar um detector em um "Memory detector"
