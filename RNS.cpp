@@ -71,8 +71,8 @@ void rns(const double r, double N, const int t, const int k, struct lista* ld){ 
         struct elem* aux = ld->inicio;
         for(struct elem* aux = ld->inicio; aux->prox != NULL; aux = aux->prox){ //para cada d no conjunto de detectors
             struct arvore* nearCells = ; //insere na árvore binária(já sai ordenado na passagem em ordem) a distância de cada k vizinhos de d no self set
-            double nearestCells = ; //mediana da nearCells
-            if(nearestCells < r){ //d está no self space
+            double nearestSelfs = ; //mediana da nearCells
+            if(dist(d,nearestSelfs) < r){ //d está no self space
                 dir = -1; //?
                 if (aux->d->idade > t){
                     free(aux->d);
@@ -89,11 +89,4 @@ void rns(const double r, double N, const int t, const int k, struct lista* ld){ 
             }
         } 
     }
-}
-
-int main(){
-    int tamanho, t, k;
-    double r, N;
-    struct lista* ld = criaLista(tamanho);
-    rns(r, N, t, k, ld); //retorna objetivo no ld?
 }

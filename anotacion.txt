@@ -178,3 +178,14 @@ Mas possuem limitações em interpretar o problem spcae original, possuem um pot
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #ALgoritmos de seleção negativa com representação em valores reais
+
+RNS representador por um vetor n-dimensional (centro) e um valor representando o raio
+Um detector pode ser visto como uma hyperesfera em Rn
+matching rule é uma "função membership" do detector (distância euclidiana do antigeno do detector e o raio do detector)
+Input: self-samples representadas por pontos/vetores n-dimensionais
+Algoritmo tenta evoluir um outro set de pontos (detectores) que cobrem o nonself space
+Uma nova sample 's' é detectada por um detector 'd', se a distância entre 'd' e 's' é até 'r'. Logo r é uma boa distância para o detector estar de s
+Para determinar se um detector d match um self-point, o algoritmo calcula o KNN de d, então calcula a distância média dos KNN
+Se a distância for menor que r, então o detector deu match.
+- matching function no livro
+regra para o tamanho em que um detector será movido está no livro também
